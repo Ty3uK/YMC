@@ -22,21 +22,15 @@ class PlayerViewController: NSViewController {
     
     @IBOutlet var linkButton: NSButton!
     @IBOutlet var likeButton: NSButton!
+    @IBOutlet var settingsButton: NSButton!
+    @IBOutlet var settingsPopupButton: NSPopUpButton!
     
     private let disposeBag = DisposeBag()
     
     private var invisibleWindow: NSWindow? = nil
     
-    let log = SwiftyBeaver.self
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
-        let file = FileDestination()
-        
-        file.logFileURL = URL(fileURLWithPath: "/tmp/ymc.log")
-        
-        log.addDestination(file)
     }
     
     override func viewDidLoad() {
@@ -86,17 +80,35 @@ class PlayerViewController: NSViewController {
         guard let identifier = sender.identifier?.rawValue else { return }
         
         switch identifier {
-        case "PLAY_PAUSE":
+        case "play_pause":
             Player.instance.emitPressedButton(.PLAY_PAUSE)
-        case "LIKE":
+        case "like":
             Player.instance.emitPressedButton(.LIKE)
-        case "NEXT":
+        case "next":
             Player.instance.emitPressedButton(.NEXT)
-        case "PREV":
+        case "prev":
             Player.instance.emitPressedButton(.PREV)
+        case "refresh":
+            Player.instance.emitPressedButton(.REFRESH)
         default:
             return
         }
+    }
+    
+    @IBAction func menuItemClick(_ sender: NSMenuItem) {
+        guard let identifier = sender.identifier?.rawValue else { return }
+        
+        switch identifier {
+        case "quit":
+            exit(0)
+        default:
+            return
+        }
+    }
+    
+    
+    @IBAction func settingsButtonClick(_ sender: NSButton) {
+        settingsPopupButton.performClick(sender)
     }
     
     @IBAction func shareButtonClick(_ sender: NSButton) {
@@ -126,7 +138,6 @@ class PlayerViewController: NSViewController {
         picker.delegate = self
         picker.show(relativeTo: view.frame, of: view, preferredEdge: .minY)
     }
-    
 }
 
 extension PlayerViewController {

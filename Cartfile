@@ -1,4 +1,5 @@
 github "ReactiveX/RxSwift" ~> 4.0
 github "SwiftyBeaver/SwiftyBeaver"
 github "Ty3uK/MediaKeyTap" "master"
+github "JohnSundell/Files"
 

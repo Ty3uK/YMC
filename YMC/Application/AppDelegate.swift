@@ -8,7 +8,6 @@
 
 import Cocoa
 import MediaKeyTap
-import SwiftyBeaver
 import RxSwift
 
 @NSApplicationMain
@@ -22,25 +21,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var mediaKeyTap: MediaKeyTap? = nil
     var playerViewController: PlayerViewController? = nil
     
-    let log = SwiftyBeaver.self
-    
     let disposeBag = DisposeBag()
     
     override init() {
         super.init()
-        
-        let file = FileDestination()
-        
-        file.logFileURL = URL(fileURLWithPath: "/tmp/ymc.log")
-        
-        log.addDestination(file)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        prepareLaunch()
+        
         playerViewController = PlayerViewController.freshController()
         
         IncomingMessage.register(CurrentTrack.self, for: "TRACK_INFO")
         IncomingMessage.register(CurrentTrack.self, for: "CURRENT_TRACK")
+        IncomingMessage.register(CurrentTrack.self, for: "REFRESH")
         IncomingMessage.register(Controls.self, for: "CONTROLS")
         IncomingMessage.register(IsPlaying.self, for: "PLAYING")
         IncomingMessage.register(IsLiked.self, for: "TOGGLE_LIKE")
@@ -66,6 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 writeMessage("NEXT")
             case .PREV:
                 writeMessage("PREV")
+            case .REFRESH:
+                writeMessage("REFRESH")
             default:
                 return
             }
@@ -76,7 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-    @objc func togglePopover(_ sender: Any?) {
+    @objc func togglePopover(_ sender: NSButton) {
         if popover.isShown {
             popover.performClose(sender)
         } else {
@@ -87,18 +83,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    private func setStatusItemTitle(_ title: String? = nil) {
+    private func setupStatusItem(_ title: String? = nil) {
         if let button = statusItem.button {
             button.image = NSImage(named: "logo")
-            
-        }
-    }
-    
-    private func setupStatusItem(_ title: String? = nil) {
-        setStatusItemTitle()
-        
-        if let button = statusItem.button {
             button.action = #selector(togglePopover(_:))
+            button.sendAction(on: [.leftMouseDown, .rightMouseDown])
         }
     }
     
@@ -129,10 +118,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 message = String(data: data.subdata(in: 4..<(length + 4)), encoding: .utf8) ?? ""
             }
             
+            Logger.instance.log(logLevel: .info, message: message)
+            
             if message.count == 0 { return }
             
             guard let json = try? JSONDecoder().decode(IncomingMessage.self, from: message.data(using: .utf8)!) else { return }
-
+            
             switch json.data {
             case let data as CurrentTrack:
                 Player.instance.changeCoverImage(data.cover)
@@ -199,3 +190,44 @@ extension AppDelegate {
     }
 }
 
+extension AppDelegate {
+    func prepareLaunch() {
+        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as String: true] as CFDictionary
+        
+        if !AXIsProcessTrustedWithOptions(options) {
+            showAlertAndQuit(
+                title: "Action required",
+                message: "To be able to switch songs by pressing media keys you must activate the app in accessibility settings"
+            )
+        }
+        
+        let writeManifestStatus = writeManifest()
+        
+        switch writeManifestStatus {
+        case .error:
+            showAlertAndQuit(
+                title: "Error",
+                message: "Cannot write manifest file for extension.\nApp will be closed."
+            )
+        case .updated:
+            showAlertAndQuit(
+                title: "Action required",
+                message: "Manifest updated. Please, restart your browser."
+            )
+        default:
+            return
+        }
+    }
+    
+    private func showAlertAndQuit(title: String, message: String) {
+        let alert = NSAlert()
+        
+        alert.messageText = title
+        alert.informativeText = message
+        alert.addButton(withTitle: "Got it")
+        
+        if alert.runModal() == .alertFirstButtonReturn {
+            exit(1)
+        }
+    }
+}

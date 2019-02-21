@@ -23,6 +23,7 @@ enum PlayerButtons {
     case LINK
     case LIKE
     case TRACK_INFO
+    case REFRESH
     case NOOP
 }
 

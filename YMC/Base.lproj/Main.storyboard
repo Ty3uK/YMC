@@ -720,7 +720,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button identifier="PREV" translatesAutoresizingMaskIntoConstraints="NO" id="h3G-QZ-WrS">
+                            <button identifier="prev" translatesAutoresizingMaskIntoConstraints="NO" id="h3G-QZ-WrS">
                                 <rect key="frame" x="48" y="96" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Jws-eY-QZG"/>
@@ -734,7 +734,7 @@
                                     <action selector="buttonClick:" target="XfG-lQ-9wD" id="mCe-Kd-kCN"/>
                                 </connections>
                             </button>
-                            <button identifier="PLAY_PAUSE" translatesAutoresizingMaskIntoConstraints="NO" id="YUU-ZW-kla">
+                            <button identifier="play_pause" translatesAutoresizingMaskIntoConstraints="NO" id="YUU-ZW-kla">
                                 <rect key="frame" x="112" y="96" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="F8r-Nt-oGk"/>
@@ -748,7 +748,7 @@
                                     <action selector="buttonClick:" target="XfG-lQ-9wD" id="2V3-5f-zyR"/>
                                 </connections>
                             </button>
-                            <button identifier="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="jTP-QN-mmg">
+                            <button identifier="next" translatesAutoresizingMaskIntoConstraints="NO" id="jTP-QN-mmg">
                                 <rect key="frame" x="176" y="96" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="WoW-em-W4v"/>
@@ -762,8 +762,8 @@
                                     <action selector="buttonClick:" target="XfG-lQ-9wD" id="eRK-RA-pqi"/>
                                 </connections>
                             </button>
-                            <button identifier="LINK" translatesAutoresizingMaskIntoConstraints="NO" id="nhY-aJ-3OA">
-                                <rect key="frame" x="48" y="48" width="32" height="18"/>
+                            <button identifier="link" translatesAutoresizingMaskIntoConstraints="NO" id="nhY-aJ-3OA">
+                                <rect key="frame" x="55" y="48" width="18" height="18"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="link" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="7Zf-sY-NuW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -772,8 +772,8 @@
                                     <action selector="shareButtonClick:" target="XfG-lQ-9wD" id="t8V-uo-Bl3"/>
                                 </connections>
                             </button>
-                            <button identifier="LIKE" translatesAutoresizingMaskIntoConstraints="NO" id="e67-4N-AP2">
-                                <rect key="frame" x="176" y="48" width="32" height="18"/>
+                            <button identifier="like" translatesAutoresizingMaskIntoConstraints="NO" id="e67-4N-AP2">
+                                <rect key="frame" x="119" y="48" width="18" height="18"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="heart" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Ld0-bB-L5W">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -783,27 +783,87 @@
                                     <action selector="buttonClick:" target="XfG-lQ-9wD" id="UAn-9b-YP1"/>
                                 </connections>
                             </button>
+                            <button identifier="settings" translatesAutoresizingMaskIntoConstraints="NO" id="ygE-Sc-BsA" userLabel="Settings Button">
+                                <rect key="frame" x="183" y="48" width="18" height="18"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8gq-OY-sbH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="settingsButtonClick:" target="XfG-lQ-9wD" id="ugb-Z3-PXo"/>
+                                </connections>
+                            </button>
+                            <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SGb-hr-hzJ" userLabel="Settings PopupButton">
+                                <rect key="frame" x="180" y="45" width="24" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="4ii-bD-OHO"/>
+                                    <constraint firstAttribute="width" constant="18" id="ePA-TC-lWy"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="MAk-97-cN3">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="SBj-OC-Feu">
+                                        <items>
+                                            <menuItem title="Item 1" hidden="YES" id="UeG-Jz-TFs">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Enable debugging" identifier="debug" id="NcU-en-f2V">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                                <connections>
+                                                    <action selector="menuItemClick:" target="XfG-lQ-9wD" id="cUA-W3-Qgy"/>
+                                                    <binding destination="eN7-oP-TTU" name="value" keyPath="values.debug" id="GDK-ru-hcc"/>
+                                                </connections>
+                                            </menuItem>
+                                            <menuItem isSeparatorItem="YES" id="zEs-mh-OKC"/>
+                                            <menuItem title="Quit" identifier="quit" id="7Dj-5L-2H6">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                                <connections>
+                                                    <action selector="menuItemClick:" target="XfG-lQ-9wD" id="fkN-jS-xE7"/>
+                                                </connections>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <button identifier="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="ioT-gL-BSn" userLabel="Refresh Button">
+                                <rect key="frame" x="234" y="426" width="14" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="14" id="PeA-Yl-rfd"/>
+                                    <constraint firstAttribute="height" constant="14" id="UeO-54-qkU"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="refresh" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Ntf-DI-0c9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonClick:" target="XfG-lQ-9wD" id="ae6-Gg-VAP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="h3G-QZ-WrS" firstAttribute="bottom" secondItem="m2S-Jp-Qdl" secondAttribute="bottom" constant="-96" id="0sh-We-kNQ"/>
+                            <constraint firstAttribute="bottom" secondItem="h3G-QZ-WrS" secondAttribute="bottom" constant="96" id="0sh-We-kNQ"/>
                             <constraint firstAttribute="trailing" secondItem="po1-Sb-KVy" secondAttribute="trailing" constant="24" id="3Pt-Gc-SuH"/>
                             <constraint firstItem="uJd-pt-dlK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="24" id="6tT-qc-AZx"/>
-                            <constraint firstItem="jTP-QN-mmg" firstAttribute="bottom" secondItem="m2S-Jp-Qdl" secondAttribute="bottom" constant="-96" id="8s5-CK-16B"/>
+                            <constraint firstAttribute="bottom" secondItem="jTP-QN-mmg" secondAttribute="bottom" constant="96" id="8s5-CK-16B"/>
+                            <constraint firstItem="ygE-Sc-BsA" firstAttribute="centerX" secondItem="SGb-hr-hzJ" secondAttribute="centerX" id="DQv-cA-55V"/>
                             <constraint firstItem="po1-Sb-KVy" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="24" id="Dkg-eP-fOn"/>
-                            <constraint firstItem="nhY-aJ-3OA" firstAttribute="leading" secondItem="h3G-QZ-WrS" secondAttribute="leading" id="Ek4-AP-aJr"/>
                             <constraint firstItem="h3G-QZ-WrS" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="48" id="Esh-bX-3K0"/>
-                            <constraint firstItem="e67-4N-AP2" firstAttribute="centerX" secondItem="jTP-QN-mmg" secondAttribute="centerX" id="Nb7-Fd-tzG"/>
-                            <constraint firstItem="jTP-QN-mmg" firstAttribute="trailing" secondItem="e67-4N-AP2" secondAttribute="trailing" id="REu-j6-Gmo"/>
-                            <constraint firstItem="YUU-ZW-kla" firstAttribute="bottom" secondItem="m2S-Jp-Qdl" secondAttribute="bottom" constant="-96" id="VQb-U4-QZm"/>
+                            <constraint firstAttribute="trailing" secondItem="ioT-gL-BSn" secondAttribute="trailing" constant="8" id="NBM-YU-Gc8"/>
+                            <constraint firstItem="e67-4N-AP2" firstAttribute="centerX" secondItem="YUU-ZW-kla" secondAttribute="centerX" id="Nb7-Fd-tzG"/>
+                            <constraint firstAttribute="bottom" secondItem="YUU-ZW-kla" secondAttribute="bottom" constant="96" id="VQb-U4-QZm"/>
+                            <constraint firstAttribute="bottom" secondItem="ygE-Sc-BsA" secondAttribute="bottom" constant="48" id="aSC-TU-iIB"/>
                             <constraint firstItem="MbM-66-AIX" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="48" id="aXr-Ow-raG"/>
+                            <constraint firstItem="jTP-QN-mmg" firstAttribute="centerX" secondItem="ygE-Sc-BsA" secondAttribute="centerX" id="avp-se-sZc"/>
                             <constraint firstItem="MbM-66-AIX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="48" id="bjF-Da-Nq4"/>
+                            <constraint firstItem="ioT-gL-BSn" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="8" id="d1g-zs-4gA"/>
                             <constraint firstItem="nhY-aJ-3OA" firstAttribute="centerX" secondItem="h3G-QZ-WrS" secondAttribute="centerX" id="eA1-ad-iNr"/>
                             <constraint firstItem="YUU-ZW-kla" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="112" id="eYL-W8-TVT"/>
+                            <constraint firstItem="SGb-hr-hzJ" firstAttribute="bottom" secondItem="ygE-Sc-BsA" secondAttribute="bottom" id="uSA-Xc-VpM"/>
                             <constraint firstAttribute="trailing" secondItem="jTP-QN-mmg" secondAttribute="trailing" constant="48" id="wSk-hq-SuZ"/>
-                            <constraint firstItem="nhY-aJ-3OA" firstAttribute="bottom" secondItem="m2S-Jp-Qdl" secondAttribute="bottom" constant="-48" id="x0a-T1-ucX"/>
+                            <constraint firstAttribute="bottom" secondItem="nhY-aJ-3OA" secondAttribute="bottom" constant="48" id="x0a-T1-ucX"/>
                             <constraint firstItem="po1-Sb-KVy" firstAttribute="top" secondItem="uJd-pt-dlK" secondAttribute="bottom" constant="2" id="yGd-BE-X4u"/>
                             <constraint firstAttribute="trailing" secondItem="uJd-pt-dlK" secondAttribute="trailing" constant="24" id="yXV-5c-ciX"/>
-                            <constraint firstItem="e67-4N-AP2" firstAttribute="bottom" secondItem="m2S-Jp-Qdl" secondAttribute="bottom" constant="-48" id="z1h-Dw-y4S"/>
+                            <constraint firstAttribute="bottom" secondItem="e67-4N-AP2" secondAttribute="bottom" constant="48" id="z1h-Dw-y4S"/>
                             <constraint firstItem="uJd-pt-dlK" firstAttribute="top" secondItem="MbM-66-AIX" secondAttribute="bottom" constant="32" id="zh4-hs-JuE"/>
                         </constraints>
                     </view>
@@ -813,12 +873,15 @@
                         <outlet property="linkButton" destination="nhY-aJ-3OA" id="RCf-bt-ZCp"/>
                         <outlet property="playPauseButton" destination="YUU-ZW-kla" id="HJG-Rm-oLY"/>
                         <outlet property="rewindButton" destination="h3G-QZ-WrS" id="vwL-tq-DGR"/>
+                        <outlet property="settingsButton" destination="ygE-Sc-BsA" id="WEt-Mt-QXu"/>
+                        <outlet property="settingsPopupButton" destination="SGb-hr-hzJ" id="I9d-1N-Y0W"/>
                         <outlet property="songArtist" destination="po1-Sb-KVy" id="imo-wu-DY9"/>
                         <outlet property="songCover" destination="MbM-66-AIX" id="2Qn-uU-zvO"/>
                         <outlet property="songTitle" destination="uJd-pt-dlK" id="gKE-HR-eVR"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="eN7-oP-TTU"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
@@ -828,6 +891,8 @@
         <image name="heart" width="18" height="18"/>
         <image name="link" width="18" height="18"/>
         <image name="play" width="18" height="18"/>
+        <image name="refresh" width="18" height="18"/>
         <image name="rewind" width="18" height="18"/>
+        <image name="settings" width="18" height="18"/>
     </resources>
 </document>
