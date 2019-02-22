@@ -118,7 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 message = String(data: data.subdata(in: 4..<(length + 4)), encoding: .utf8) ?? ""
             }
             
-            Logger.instance.log(logLevel: .info, message: message)
+            Logger.instance.log(logLevel: .info, message: "MESSAGE FROM EXT: \(message)")
             
             if message.count == 0 { return }
             
