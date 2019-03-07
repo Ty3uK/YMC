@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.0.3",
+
+  "default_locale": "en",
+
+  "icons": {
+    "48": "icons/48.png",
+    "96": "icons/96.png"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "ymc@karelov.info",
+      "strict_min_version": "54.0"
+    }
+  },
+
+  "web_accessible_resources": [
+    "ymc_injection.js"
+  ],
+
+  "background": {
+    "scripts": ["ymc.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://music.yandex.ru/*"],
+      "js": ["ymc_injector.js"]
+    }
+  ],
+
+  "permissions": [
+    "*://music.yandex.ru/*",
+    "tabs",
+    "nativeMessaging"
+  ]
+}
