@@ -11,8 +11,7 @@ import Files
 
 enum WriteManifestStatus {
     case updated
-    case created
-    case skiped
+    case skipped
     case error
 }
 
@@ -22,7 +21,8 @@ struct Manifest: Codable, Equatable {
     let path: String
     let type: String
     let allowed_extensions: [String]
-    
+    let allowed_origins: [String]
+
     static func == (a: Manifest, b: Manifest) -> Bool {
         return (
             a.name == b.name &&
@@ -34,7 +34,13 @@ struct Manifest: Codable, Equatable {
     }
 }
 
-private let manifestsFolderPath = "\(Folder.home.path)Library/Application Support/Mozilla/NativeMessagingHosts"
+private let paths = [
+    "\(Folder.home.path)Library/Application Support/Mozilla",
+    "\(Folder.home.path)Library/Application Support/Google/Chrome",
+    "\(Folder.home.path)Library/Application Support/Chromium",
+    "\(Folder.home.path)Library/Application Support/com.operasoftware.Opera",
+    "\(Folder.home.path)Library/Application Support/Vivaldi"
+]
 
 private func createManifest(appPath: String) -> Manifest {
     return Manifest(
@@ -42,45 +48,67 @@ private func createManifest(appPath: String) -> Manifest {
         description: "Control Yandex.Music from any window in MacOS",
         path: appPath,
         type: "stdio",
-        allowed_extensions: ["ymc@karelov.info"]
+        allowed_extensions: ["ymc@karelov.info"],
+        allowed_origins: ["chrome-extension://difigcdcjjgaeeoigbjkddcimajmcgem/"]
     )
 }
 
-func writeManifest() -> WriteManifestStatus {
+private func writeManifest(_ path: String) -> WriteManifestStatus {
     guard let appPath = Bundle.main.executablePath else { return .error }
-    
+
     let manifest = createManifest(appPath: appPath)
     let encoder = JSONEncoder()
-    
+
     encoder.outputFormatting = .prettyPrinted
-    
+
     guard let manifestData = try? encoder.encode(manifest) else { return .error }
-    guard let folder = try? Folder(path: manifestsFolderPath) else { return .error }
-    
-    var targetFile: File? = nil
-    
+    guard let browserFolder = try? Folder(path: path) else { return .skipped }
+
+    var folder: Folder
+
+    if let targetFolder = try? browserFolder.subfolder(named: "NativeMessagingHosts") {
+        folder = targetFolder
+    } else if let targetFolder = try? browserFolder.createSubfolder(named: "NativeMessagingHosts") {
+        folder = targetFolder
+    } else {
+        return .skipped
+    }
+
+    var targetFile: File?
+
     if let file = try? folder.file(named: "ymc.json") {
         guard let existingManifestData = try? file.read() else { return .error }
-        guard let existingManifest = try? JSONDecoder().decode(Manifest.self, from: existingManifestData) else { return .error }
-        
-        if existingManifest == manifest {
-            return .skiped
+
+        if let existingManifest = try? JSONDecoder().decode(Manifest.self, from: existingManifestData), existingManifest == manifest {
+            return .skipped
         }
-        
+
         targetFile = file
     } else {
         targetFile = try? folder.createFile(named: "ymc.json")
     }
-    
+
     if targetFile == nil {
         return .error
     }
-    
+
     do {
         try targetFile!.write(data: manifestData)
     } catch {
         return .error
     }
-    
+
     return .updated
+}
+
+func processManifests() -> WriteManifestStatus {
+    let results = paths.map { writeManifest($0) }
+
+    if results.contains(.error) {
+        return .error
+    } else if results.contains(.updated) {
+        return .updated
+    }
+
+    return .skipped
 }

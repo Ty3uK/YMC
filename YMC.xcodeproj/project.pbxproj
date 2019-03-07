@@ -10,6 +10,10 @@
 		CE0E362F2212898700877823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E362E2212898700877823 /* AppDelegate.swift */; };
 		CE0E36332212898A00877823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0E36322212898A00877823 /* Assets.xcassets */; };
 		CE0E36362212898A00877823 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0E36342212898A00877823 /* Main.storyboard */; };
+		CE19E05722226F2B0047B234 /* AppDelegate+MediaKeyTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19E05622226F2B0047B234 /* AppDelegate+MediaKeyTap.swift */; };
+		CE19E05922226FA60047B234 /* AppDelegate+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19E05822226FA60047B234 /* AppDelegate+Permissions.swift */; };
+		CE19E05B22226FDF0047B234 /* AppDelegate+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19E05A22226FDF0047B234 /* AppDelegate+Notifications.swift */; };
+		CE19E05D222270430047B234 /* AppDelegate+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19E05C222270430047B234 /* AppDelegate+Messaging.swift */; };
 		CE8623A4221BD1D400AEEF59 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8623A3221BD1D400AEEF59 /* BinUtils.swift */; };
 		CE8759722217390A008C8B5C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8759712217390A008C8B5C /* Player.swift */; };
 		CE89AC772213EEC20028760B /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE89AC752213EEC20028760B /* Messaging.swift */; };
@@ -72,6 +76,10 @@
 		CE0E36352212898A00877823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE0E36372212898A00877823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0E36382212898A00877823 /* YMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YMC.entitlements; sourceTree = "<group>"; };
+		CE19E05622226F2B0047B234 /* AppDelegate+MediaKeyTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+MediaKeyTap.swift"; sourceTree = "<group>"; };
+		CE19E05822226FA60047B234 /* AppDelegate+Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Permissions.swift"; sourceTree = "<group>"; };
+		CE19E05A22226FDF0047B234 /* AppDelegate+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notifications.swift"; sourceTree = "<group>"; };
+		CE19E05C222270430047B234 /* AppDelegate+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Messaging.swift"; sourceTree = "<group>"; };
 		CE8623A3221BD1D400AEEF59 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		CE8759712217390A008C8B5C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CE89AC752213EEC20028760B /* Messaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
@@ -146,10 +154,22 @@
 			path = YMC;
 			sourceTree = "<group>";
 		};
-		CE8623A0221BD17500AEEF59 /* Application */ = {
+		CE19E05522226F020047B234 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
 				CE0E362E2212898700877823 /* AppDelegate.swift */,
+				CE19E05622226F2B0047B234 /* AppDelegate+MediaKeyTap.swift */,
+				CE19E05822226FA60047B234 /* AppDelegate+Permissions.swift */,
+				CE19E05A22226FDF0047B234 /* AppDelegate+Notifications.swift */,
+				CE19E05C222270430047B234 /* AppDelegate+Messaging.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		CE8623A0221BD17500AEEF59 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CE19E05522226F020047B234 /* AppDelegate */,
 				CEE809D822128B3200686E75 /* PlayerViewController.swift */,
 			);
 			path = Application;
@@ -257,8 +277,12 @@
 				CE89AC772213EEC20028760B /* Messaging.swift in Sources */,
 				CE8623A4221BD1D400AEEF59 /* BinUtils.swift in Sources */,
 				CEDB4D2C221D1F2E0012D50D /* Manifest.swift in Sources */,
+				CE19E05D222270430047B234 /* AppDelegate+Messaging.swift in Sources */,
 				CE0E362F2212898700877823 /* AppDelegate.swift in Sources */,
 				CEC02744221E8A1A007B32EE /* Logger.swift in Sources */,
+				CE19E05B22226FDF0047B234 /* AppDelegate+Notifications.swift in Sources */,
+				CE19E05922226FA60047B234 /* AppDelegate+Permissions.swift in Sources */,
+				CE19E05722226F2B0047B234 /* AppDelegate+MediaKeyTap.swift in Sources */,
 				CE8759722217390A008C8B5C /* Player.swift in Sources */,
 				CEE809D922128B3200686E75 /* PlayerViewController.swift in Sources */,
 			);

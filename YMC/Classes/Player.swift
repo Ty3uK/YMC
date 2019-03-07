@@ -49,13 +49,19 @@ struct IsLiked: Decodable {
     let state: Bool
 }
 
+struct PlayerState: Decodable {
+    let currentTrack: CurrentTrack
+    let controls: Controls
+    let isPlaying: Bool
+}
+
 class Player {
     private static let _instance = Player()
-    
+
     static var instance: Player {
         get { return _instance }
     }
-    
+
     private let _availableControls$ = BehaviorSubject(value: Controls(
         next: true,
         prev: false,
@@ -70,14 +76,14 @@ class Player {
         link: nil
     ))
     private let _buttonPress$ = BehaviorSubject(value: PlayerButtons.NOOP)
-    private let _coverImage$ = BehaviorSubject(value: NSImage(named: "placeholder"))
-    
+    private let _coverImage$ = BehaviorSubject(value: NSImage(named: "logo_large"))
+
     public var availableControls$: Observable<Controls>
     public var playingState$: Observable<Bool>
     public var currentTrack$: Observable<CurrentTrack>
     public var buttonPress$: Observable<PlayerButtons>
     public var coverImage$: Observable<NSImage?>
-    
+
     public var currentTrack: CurrentTrack? {
         get {
             guard let result = try? _currentTrack$.value() else { return nil }
@@ -90,7 +96,7 @@ class Player {
             return result
         }
     }
-    
+
     private init() {
         availableControls$ = _availableControls$.asObservable()
         playingState$ = _playingState$.asObservable()
@@ -98,22 +104,22 @@ class Player {
         buttonPress$ = _buttonPress$.asObservable()
         coverImage$ = _coverImage$.asObservable()
     }
-    
+
     public func changeControls(_ controls: Controls) {
         _availableControls$.onNext(controls)
     }
-    
+
     public func changePlayingState(_ state: Bool) {
         _playingState$.onNext(state)
     }
-    
+
     public func changeCurrentTrack(_ state: CurrentTrack) {
         _currentTrack$.onNext(state)
     }
-    
+
     public func changeLikedState(_ state: Bool) {
         guard let currentTrack = try? _currentTrack$.value() else { return }
-        
+
         let newCurrentTrack = CurrentTrack(
             title: currentTrack.title,
             artist: currentTrack.artist,
@@ -121,20 +127,20 @@ class Player {
             liked: state,
             link: currentTrack.link
         )
-        
+
         _currentTrack$.onNext(newCurrentTrack)
     }
-    
+
     public func emitPressedButton(_ button: PlayerButtons) {
         _buttonPress$.onNext(button)
     }
-    
+
     public func changeCoverImage(_ url: URL?) {
         guard let url = url else {
-            _coverImage$.onNext(NSImage(named: "placeholder"))
+            _coverImage$.onNext(NSImage(named: "logo_large"))
             return
         }
-        
+
         URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             guard let data = data, error == nil else { return }
             self._coverImage$.onNext(NSImage(data: data))
