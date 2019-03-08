@@ -78,6 +78,10 @@ private func writeManifest(_ path: String) -> WriteManifestStatus {
     encoder.outputFormatting = .prettyPrinted
 
     guard let manifestData = try? encoder.encode(manifest) else { return .error }
+    guard let manifestDataString = String(data: manifestData, encoding: .utf8)?
+        .replacingOccurrences(of: "\\/", with: "/")
+        .replacingOccurrences(of: " : ", with: ": ") else { return .error }
+    guard let manifestDataFixed = manifestDataString.data(using: .utf8) else { return .error }
     guard let browserFolder = try? Folder(path: path) else { return .skipped }
 
     var folder: Folder
@@ -109,7 +113,7 @@ private func writeManifest(_ path: String) -> WriteManifestStatus {
     }
 
     do {
-        try targetFile!.write(data: manifestData)
+        try targetFile!.write(data: manifestDataFixed)
     } catch {
         return .error
     }
