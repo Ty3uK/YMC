@@ -14,9 +14,10 @@ extension AppDelegate {
         let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as String: true] as CFDictionary
 
         if !AXIsProcessTrustedWithOptions(options) {
-            showAlertAndQuit(
+            showAlert(
                 title: "Action required",
-                message: "To be able to switch songs by pressing media keys you must activate the app in accessibility settings"
+                message: "To be able to switch songs by pressing media keys you must activate the app in accessibility settings",
+                quitAfter: false
             )
         }
 
@@ -24,28 +25,30 @@ extension AppDelegate {
 
         switch writeManifestStatus {
         case .error:
-            showAlertAndQuit(
+            showAlert(
                 title: "Error",
-                message: "Cannot write manifest file for extension.\nApp will be closed."
+                message: "Cannot write manifest file for extension.\nApp will be closed.",
+                quitAfter: true
             )
         case .updated:
-            showAlertAndQuit(
+            showAlert(
                 title: "Action required",
-                message: "Manifest updated. Please, restart your browser."
+                message: "Manifest updated. Please, restart your browser.",
+                quitAfter: true
             )
         default:
             return
         }
     }
 
-    private func showAlertAndQuit(title: String, message: String) {
+    private func showAlert(title: String, message: String, quitAfter: Bool) {
         let alert = NSAlert()
 
         alert.messageText = title
         alert.informativeText = message
         alert.addButton(withTitle: "Got it")
 
-        if alert.runModal() == .alertFirstButtonReturn {
+        if quitAfter && alert.runModal() == .alertFirstButtonReturn {
             exit(1)
         }
     }

@@ -20,8 +20,15 @@ struct Manifest: Codable, Equatable {
     let description: String
     let path: String
     let type: String
-    let allowed_extensions: [String]
-    let allowed_origins: [String]
+    var allowed_extensions: [String]? = nil
+    var allowed_origins: [String]? = nil
+
+    init(name: String, description: String, path: String, type: String) {
+        self.name = name
+        self.description = description
+        self.path = path
+        self.type = type
+    }
 
     static func == (a: Manifest, b: Manifest) -> Bool {
         return (
@@ -29,7 +36,10 @@ struct Manifest: Codable, Equatable {
             a.description == b.description &&
             a.path == b.path &&
             a.type == b.type &&
-            a.allowed_extensions.elementsEqual(b.allowed_extensions)
+            (
+                (a.allowed_extensions != nil && b.allowed_extensions != nil && a.allowed_extensions!.elementsEqual(b.allowed_extensions!)) ||
+                (a.allowed_origins != nil && b.allowed_origins != nil && a.allowed_origins!.elementsEqual(b.allowed_origins!))
+            )
         )
     }
 }
@@ -42,21 +52,27 @@ private let paths = [
     "\(Folder.home.path)Library/Application Support/Vivaldi"
 ]
 
-private func createManifest(appPath: String) -> Manifest {
-    return Manifest(
+private func createManifest(appPath: String, isChromeBasedBrowser: Bool) -> Manifest {
+    var manifest = Manifest(
         name: "ymc",
         description: "Control Yandex.Music from any window in MacOS",
         path: appPath,
-        type: "stdio",
-        allowed_extensions: ["ymc@karelov.info"],
-        allowed_origins: ["chrome-extension://difigcdcjjgaeeoigbjkddcimajmcgem/"]
+        type: "stdio"
     )
+
+    if isChromeBasedBrowser {
+        manifest.allowed_origins = ["chrome-extension://difigcdcjjgaeeoigbjkddcimajmcgem/"]
+    } else {
+        manifest.allowed_extensions = ["ymc@karelov.info"]
+    }
+
+    return manifest
 }
 
 private func writeManifest(_ path: String) -> WriteManifestStatus {
     guard let appPath = Bundle.main.executablePath else { return .error }
 
-    let manifest = createManifest(appPath: appPath)
+    let manifest = createManifest(appPath: appPath, isChromeBasedBrowser: !path.contains("Mozilla"))
     let encoder = JSONEncoder()
 
     encoder.outputFormatting = .prettyPrinted
