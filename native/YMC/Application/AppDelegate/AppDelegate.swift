@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var playerViewController: PlayerViewController? = nil
     var mediaKeyTap: MediaKeyTap? = nil
+    var isAccessibilityAvailable = false
 
     let disposeBag = DisposeBag()
 

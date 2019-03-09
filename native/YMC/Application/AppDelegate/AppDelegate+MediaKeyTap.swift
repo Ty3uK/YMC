@@ -35,6 +35,8 @@ extension AppDelegate: MediaKeyTapDelegate {
     }
 
     func readKeys() {
+        if !isAccessibilityAvailable { return }
+
         mediaKeyTap = MediaKeyTap(delegate: self)
         mediaKeyTap?.start()
     }

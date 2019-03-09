@@ -19,6 +19,8 @@ extension AppDelegate {
                 message: "To be able to switch songs by pressing media keys you must activate the app in accessibility settings",
                 quitAfter: false
             )
+        } else {
+            isAccessibilityAvailable = true
         }
 
         let writeManifestStatus = processManifests()
