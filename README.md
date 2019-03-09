@@ -54,8 +54,8 @@
 
 ## Install
 
-- Download and install extension for your favorite browser from [release page](https://github.com/Ty3uK/YandexMusicControl/releases)
-- Download application from [release page](https://github.com/Ty3uK/YandexMusicControl/releases) and copy to `Applications` folder
+- Download and install extension for your favorite browser from [release page](https://github.com/Ty3uK/YMC/releases)
+- Download application from [release page](https://github.com/Ty3uK/YMC/releases) and copy to `Applications` folder
 - Run application and wait for message `Manifest updated`, click `Got it`
 - When you visit `music.yandex.ru` application will be started automatically
 
