@@ -49,15 +49,15 @@
 | **Next**                    | Switch to next track       |
 | **Prev**                    | Switch to previous track   |
 | **&#8984;** &#43; **Play**  | Show current track info    |
-| **&#8984;** &#43; **Next**  | Like/Unlike current track |
-| **&#8984;** &#43; **Prev**  | Copy link to current track |
+| **&#8984;** &#43; **Next**  | Like/Unlike current track  |
+| **&#8984;** &#43; **Prev**  | Copy current track link    |
 
 ## Install
 
 - Download and install extension for your favorite browser from [release page](https://github.com/Ty3uK/YandexMusicControl/releases)
 - Download application from [release page](https://github.com/Ty3uK/YandexMusicControl/releases) and copy to `Applications` folder
 - Run application and wait for message `Manifest updated`, click `Got it`
-- When you visit `music.yandex.ru` application will be started automaticaly
+- When you visit `music.yandex.ru` application will be started automatically
 
 If you want to use native media keys - enable your browser in accessibility settings (`System Preferences → Security & Privacy → Accessibility`) and reload yandex music tab in browser
 
