@@ -71,6 +71,7 @@ When `Enable debugging` checkbox is checked, application will write log file to 
 - [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver)
 - [MediaKeyTap](https://github.com/nhurden/MediaKeyTap) ([fork](https://github.com/Ty3uK/MediaKeyTap))
 - [Files](https://github.com/JohnSundell/Files)
+- [BinUtils](https://github.com/nst/BinUtils)
 
 ## License
 
