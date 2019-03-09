@@ -49,6 +49,7 @@ private let paths = [
     "\(Folder.home.path)Library/Application Support/Google/Chrome",
     "\(Folder.home.path)Library/Application Support/Chromium",
     "\(Folder.home.path)Library/Application Support/com.operasoftware.Opera",
+    "\(Folder.home.path)Library/Application Support/Yandex/YandexBrowser",
     "\(Folder.home.path)Library/Application Support/Vivaldi"
 ]
 
@@ -61,7 +62,7 @@ private func createManifest(appPath: String, isChromeBasedBrowser: Bool) -> Mani
     )
 
     if isChromeBasedBrowser {
-        manifest.allowed_origins = ["chrome-extension://difigcdcjjgaeeoigbjkddcimajmcgem/"]
+        manifest.allowed_origins = ["chrome-extension://mhjachgjcpppedbkfaajhodfgiilbmci/"]
     } else {
         manifest.allowed_extensions = ["ymc@karelov.info"]
     }
