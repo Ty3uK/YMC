@@ -10,7 +10,6 @@ cache: yarn
 
 script:
   - yarn build
-  - touch dist/.travis.yml
 
 deploy:
   provider: pages
