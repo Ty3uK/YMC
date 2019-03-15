@@ -1,3 +1,7 @@
+<p align="right">
+  <a href="README-ru.md">Русская версия</a>
+</p>
+
 <h1 align="center">
   <img src=".github/ym.svg" alt="Yandex Music Logo" width="128">
   <br>
@@ -32,7 +36,7 @@
 
 ## Features
 
-- Control playback from any window or screen through top bar popup
+- Control playback from any window or screen using the widget in the top panel
 - Control playback with Mac native media keys
 - Get current track info with notification
 - Share link to track through native sharing menu
@@ -40,6 +44,7 @@
 ## TODO
 
 - [ ] Handle headphones media keys
+- [ ] Handle other domains (not only music.yandex.ru)
 
 ## Hotkeys
 
@@ -59,7 +64,7 @@
 - Run application and wait for message `Manifest updated`, click `Got it`
 - When you visit `music.yandex.ru` application will be started automatically
 
-If you want to use native media keys - enable your browser in accessibility settings (`System Preferences → Security & Privacy → Accessibility`) and reload yandex music tab in browser
+If you want to control playback with native media keys - enable your browser in accessibility settings (`System Preferences → Security & Privacy → Accessibility`) and reload yandex music tab in browser
 
 ## Debug
 
