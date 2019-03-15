@@ -42,7 +42,12 @@
 
   &_video {
     z-index: 2;
-    animation: fadeIn 1s ease-in-out;
+    display: none;
+
+    &.animated {
+      display: inherit;
+      animation: fadeIn 1s ease-in-out;
+    }
   }
 }
 
