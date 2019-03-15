@@ -2,9 +2,10 @@ doctype html
 head(lang='en')
   include meta/meta.pug
   include preload/preload.pug
-  link(rel='stylesheet' href='index.css')
+  link(rel='stylesheet' href='/index.css')
 
 body
+  include lang/lang.pug
   include info/info.pug
   include laptop/laptop.pug
-  script(src='index.js')
+  script(src='/index.js')

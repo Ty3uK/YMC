@@ -1,7 +1,7 @@
-import { query } from '../base/base';
+import { query } from '/base/base';
 
-import sourceLow from '../../static/video-low.mp4';
-import sourceHigh from '../../static/video-high.mp4';
+import sourceLow from '/../static/video-low.mp4';
+import sourceHigh from '/../static/video-high.mp4';
 
 function insertSource(videoElement) {
   const sourceElement = document.createElement('source');

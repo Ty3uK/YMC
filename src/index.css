@@ -1,4 +1,5 @@
-@import url('./animations/animations.css');
-@import url('./base/base.css');
-@import url('./laptop/laptop.css');
-@import url('./info/info.css');
+@import url('/animations/animations.css');
+@import url('/base/base.css');
+@import url('/lang/lang.css');
+@import url('/laptop/laptop.css');
+@import url('/info/info.css');

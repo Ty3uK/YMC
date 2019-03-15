@@ -6,11 +6,11 @@
   "author": "Maksim Karelov <max.karelov@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "_build": "parcel build src/index.pug --experimental-scope-hoisting --public-url /YMC",
+    "_build": "parcel build src/index.pug src/ru/index.pug --experimental-scope-hoisting --public-url /YMC",
     "_clean": "rimraf dist",
     "lint": "eslint src/**/*.js && stylelint src/**/*.css",
     "build": "yarn _clean && yarn _build",
-    "dev": "parcel src/index.pug"
+    "dev": "parcel src/index.pug src/ru/index.pug"
   },
   "postcss": {
     "plugins": {
@@ -25,6 +25,14 @@
   ],
   "eslintConfig": {
     "extends": "airbnb",
+    "rules": {
+      "import/no-absolute-path": {
+        "esmodule": false
+      },
+      "import/no-unresolved": {
+        "esmodule": false
+      }
+    },
     "env": {
       "browser": true
     }
