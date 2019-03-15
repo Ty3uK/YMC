@@ -10,7 +10,6 @@ cache: yarn
 
 script:
   - yarn build
-  - cp static/_logo.png dist/_logo.png
 
 deploy:
   provider: pages
