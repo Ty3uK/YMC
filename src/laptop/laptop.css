@@ -90,3 +90,15 @@ body.no-webp .laptop {
     }
   }
 }
+
+@media all and (max-width: 480px) {
+  .laptop {
+    transform: scale(0.8);
+  }
+}
+
+@media all and (max-width: 320px) {
+  .laptop {
+    transform: scale(0.6);
+  }
+}

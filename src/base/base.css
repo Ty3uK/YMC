@@ -17,7 +17,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  min-width: 480px;
   min-height: 100vh;
   font-family: 'system', sans-serif;
   font-size: 13px;
@@ -30,6 +29,6 @@ body {
   body {
     flex-direction: column;
     justify-content: center;
-    padding: 0.5em 0;
+    padding: 0.5em;
   }
 }
