@@ -1,0 +1,87 @@
+.laptop {
+  --laptop-width-sm: 480px;
+  --laptop-height-sm: 306px;
+  --laptop-width-md: 784px;
+  --laptop-height-md: 500px;
+  --laptop-width-lg: 1024px;
+  --laptop-height-lg: 653px;
+  --laptop-video-top-sm: 16px;
+  --laptop-video-left-sm: 33px;
+  --laptop-video-top-md: 25px;
+  --laptop-video-left-md: 54px;
+  --laptop-video-top-lg: 36px;
+  --laptop-video-left-lg: 70px;
+  --laptop-video-width-sm: 414px;
+  --laptop-video-height-sm: 261px;
+  --laptop-video-width-md: 677px;
+  --laptop-video-height-md: 428px;
+  --laptop-video-width-lg: 883px;
+  --laptop-video-height-lg: 553px;
+
+  position: relative;
+  width: var(--laptop-width-lg);
+  height: var(--laptop-height-lg);
+  user-select: none;
+  background-size: var(--laptop-width-lg) var(--laptop-height-lg);
+  transition: all 150ms ease-in-out;
+  animation: fadeIn 2s ease-in-out;
+
+  &_video,
+  &_image {
+    position: absolute;
+    top: var(--laptop-video-top-lg);
+    left: var(--laptop-video-left-lg);
+    width: var(--laptop-video-width-lg);
+    height: var(--laptop-video-height-lg);
+    transition: all 150ms ease-in-out;
+  }
+
+  &_image {
+    z-index: 1;
+  }
+
+  &_video {
+    z-index: 2;
+    animation: fadeIn 1s ease-in-out;
+  }
+}
+
+body.webp .laptop {
+  background-image: url('../../static/macbook.webp');
+}
+
+body.no-webp .laptop {
+  background-image: url('../../static/macbook.png');
+}
+
+@media all and (max-width: 1600px) {
+  .laptop {
+    width: var(--laptop-width-md);
+    height: var(--laptop-height-md);
+    background-size: var(--laptop-width-md) var(--laptop-height-md);
+
+    &_video,
+    &_image {
+      top: var(--laptop-video-top-md);
+      left: var(--laptop-video-left-md);
+      width: var(--laptop-video-width-md);
+      height: var(--laptop-video-height-md);
+    }
+  }
+}
+
+@media all and (max-width: 800px) {
+  .laptop {
+    width: var(--laptop-width-sm);
+    height: var(--laptop-height-sm);
+    background-size: var(--laptop-width-sm) var(--laptop-height-sm);
+
+    &_video,
+    &_image {
+      top: var(--laptop-video-top-sm);
+      left: var(--laptop-video-left-sm);
+      width: var(--laptop-video-width-sm);
+      height: var(--laptop-video-height-sm);
+    }
+  }
+}
