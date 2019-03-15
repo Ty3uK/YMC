@@ -1,18 +1,18 @@
 .laptop {
-  --laptop-width-sm: 480px;
-  --laptop-height-sm: 306px;
+  --laptop-width-sm: 450px;
+  --laptop-height-sm: 287px;
   --laptop-width-md: 784px;
   --laptop-height-md: 500px;
   --laptop-width-lg: 1024px;
   --laptop-height-lg: 653px;
-  --laptop-video-top-sm: 16px;
-  --laptop-video-left-sm: 33px;
+  --laptop-video-top-sm: 14px;
+  --laptop-video-left-sm: 31px;
   --laptop-video-top-md: 25px;
   --laptop-video-left-md: 54px;
   --laptop-video-top-lg: 36px;
   --laptop-video-left-lg: 70px;
-  --laptop-video-width-sm: 414px;
-  --laptop-video-height-sm: 261px;
+  --laptop-video-width-sm: 388px;
+  --laptop-video-height-sm: 246px;
   --laptop-video-width-md: 677px;
   --laptop-video-height-md: 428px;
   --laptop-video-width-lg: 883px;
