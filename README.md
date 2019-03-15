@@ -5,7 +5,7 @@
 </h1>
 
 <h5 align="center">
-  Control Yandex.Music from any window in MacOS.
+  Manage Yandex.Music from any macOS window
   <br>
   <br>
   <img src=".github/firefox.svg" width="24">&nbsp;
