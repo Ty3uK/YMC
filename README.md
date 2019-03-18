@@ -66,6 +66,14 @@
 
 If you want to control playback with native media keys - enable your browser in accessibility settings (`System Preferences → Security & Privacy → Accessibility`) and reload yandex music tab in browser
 
+#### Note
+
+If you get errors like `The application can't be opened` or `App is damaged and can't be opened` run this command in terminal:
+
+```bash
+sudo spctl --master-disable
+```
+
 ## Debug
 
 When `Enable debugging` checkbox is checked, application will write log file to `/tmp/ymc.log`. Attach log file in issue, please.
