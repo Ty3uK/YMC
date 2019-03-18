@@ -62,9 +62,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }.disposed(by: disposeBag)
 
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { timer in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             writeMessage("REFRESH")
-        })
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

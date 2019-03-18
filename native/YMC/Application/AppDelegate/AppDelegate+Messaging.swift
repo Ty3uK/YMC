@@ -19,9 +19,11 @@ extension AppDelegate {
     }
 
     func setupRefreshInterval() {
-        Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { _ in
-            writeMessage("REFRESH")
-        })
+        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(refreshInterval(_:)), userInfo: nil, repeats: true)
+    }
+
+    @objc func refreshInterval(_ timer: Timer) {
+        writeMessage("REFRESH")
     }
 
     func readMessages() {

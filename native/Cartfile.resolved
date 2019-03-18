@@ -1,4 +1,4 @@
-github "JohnSundell/Files" "2.2.1"
-github "ReactiveX/RxSwift" "4.4.1"
+github "JohnSundell/Files" "2.3.0"
+github "ReactiveX/RxSwift" "4.4.2"
 github "SwiftyBeaver/SwiftyBeaver" "1.6.2"
 github "Ty3uK/MediaKeyTap" "066ab19ffb1d44a02780f058af33a6155550e8ab"
