@@ -17,15 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let popover = NSPopover()
 
+    let runStdinMonitoring = CommandLine.arguments.first(where: { $0.contains("ymc.json") }) != nil
     var playerViewController: PlayerViewController? = nil
     var mediaKeyTap: MediaKeyTap? = nil
     var isAccessibilityAvailable = false
 
     let disposeBag = DisposeBag()
-
-    override init() {
-        super.init()
-    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         prepareLaunch()
@@ -37,7 +34,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupPopover()
         setupRefreshInterval()
         readKeys()
-        readMessages()
+
+        if runStdinMonitoring {
+            readMessages()
+        }
+
+        Logger.instance.log(logLevel: .info, message: "runStdinMonitoring: \(runStdinMonitoring)")
 
         Player.instance.buttonPress$.subscribe { event in
             guard let button = event.element else { return }
@@ -48,27 +50,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             case .LINK:
                 self.copyTrackLinkToClipboard()
             case .PLAY_PAUSE:
-                writeMessage("PLAY_PAUSE")
+                self.sendMessageToFrontend("PLAY_PAUSE")
             case .LIKE:
-                writeMessage("TOGGLE_LIKE")
+                self.sendMessageToFrontend("TOGGLE_LIKE")
             case .NEXT:
-                writeMessage("NEXT")
+                self.sendMessageToFrontend("NEXT")
             case .PREV:
-                writeMessage("PREV")
+                self.sendMessageToFrontend("PREV")
             case .REFRESH:
-                writeMessage("REFRESH")
+                self.sendMessageToFrontend("REFRESH")
             default:
                 return
             }
         }.disposed(by: disposeBag)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            writeMessage("REFRESH")
+            self.sendMessageToFrontend("REFRESH")
         }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+
+    func sendMessageToFrontend(_ messageType: String) {
+        if runStdinMonitoring {
+            writeMessage(messageType)
+        }
     }
 
     @objc func togglePopover(_ sender: NSButton) {

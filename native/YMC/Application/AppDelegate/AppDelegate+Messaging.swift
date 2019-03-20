@@ -23,7 +23,7 @@ extension AppDelegate {
     }
 
     @objc func refreshInterval(_ timer: Timer) {
-        writeMessage("REFRESH")
+        sendMessageToFrontend("REFRESH")
     }
 
     func readMessages() {
@@ -43,30 +43,34 @@ extension AppDelegate {
                 message = String(data: data.subdata(in: 4..<(length + 4)), encoding: .utf8) ?? ""
             }
 
-            Logger.instance.log(logLevel: .info, message: "MESSAGE FROM EXT: \(message)")
-
             if message.count == 0 { return }
 
-            guard let json = try? JSONDecoder().decode(IncomingMessage.self, from: message.data(using: .utf8)!) else { return }
+            self.handleMessage(message.data(using: .utf8)!)
+        }
+    }
 
-            switch json.data {
-            case let data as PlayerState:
-                Player.instance.changeCoverImage(data.currentTrack.cover)
-                Player.instance.changeCurrentTrack(data.currentTrack)
-                Player.instance.changeControls(data.controls)
-                Player.instance.changePlayingState(data.isPlaying)
-            case let data as CurrentTrack:
-                Player.instance.changeCoverImage(data.cover)
-                Player.instance.changeCurrentTrack(data)
-            case let data as Controls:
-                Player.instance.changeControls(data)
-            case let data as IsPlaying:
-                Player.instance.changePlayingState(data.state)
-            case let data as IsLiked:
-                Player.instance.changeLikedState(data.state)
-            default:
-                return
-            }
+    func handleMessage(_ message: Data) {
+        guard let json = try? JSONDecoder().decode(IncomingMessage.self, from: message) else { return }
+
+        Logger.instance.log(logLevel: .info, message: "MESSAGE FROM EXT: \(json)")
+
+        switch json.data {
+        case let data as PlayerState:
+            Player.instance.changeCoverImage(data.currentTrack.cover)
+            Player.instance.changeCurrentTrack(data.currentTrack)
+            Player.instance.changeControls(data.controls)
+            Player.instance.changePlayingState(data.isPlaying)
+        case let data as CurrentTrack:
+            Player.instance.changeCoverImage(data.cover)
+            Player.instance.changeCurrentTrack(data)
+        case let data as Controls:
+            Player.instance.changeControls(data)
+        case let data as IsPlaying:
+            Player.instance.changePlayingState(data.state)
+        case let data as IsLiked:
+            Player.instance.changeLikedState(data.state)
+        default:
+            return
         }
     }
 }
