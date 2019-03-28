@@ -1,7 +1,7 @@
 (function() {
   const id = chrome.runtime.id;
   const url = chrome.runtime.getURL('ymc_injection.js');
-  
+
   let script = document.querySelector(`script[data-ymc-id='${id}']`);
 
   if (script) {

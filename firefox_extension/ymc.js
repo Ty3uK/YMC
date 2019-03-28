@@ -5,7 +5,9 @@
 	const messageQueue = [];
 
 	async function onConnect(port) {
-		const tabs = await browser.tabs.query({ url: '*://music.yandex.ru/*' });
+		let tabs = (await browser.tabs.query({ url: '*://*.yandex.ru/*' })) || [];
+
+		tabs = tabs.filter(tab => tab.url.indexOf('music.') !== -1 || tab.url.indexOf('radio.') !== -1)
 
 		if (tabs.length > 1) {
 			return;
@@ -15,7 +17,6 @@
 		app = browser.runtime.connectNative('ymc');
 
 		port.onMessage.addListener(message => {
-
 			messageQueue.push(message);
 
 			const messageFromQueue = messageQueue.shift();
