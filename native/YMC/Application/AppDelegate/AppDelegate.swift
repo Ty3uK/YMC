@@ -17,7 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let popover = NSPopover()
 
-    let runStdinMonitoring = CommandLine.arguments.first(where: { $0.contains("ymc.json") }) != nil
+    let runStdinMonitoring = CommandLine.arguments.first(where: {
+        $0.contains("ymc.json") || $0.contains("chrome-extension://")
+    }) != nil
     var playerViewController: PlayerViewController? = nil
     var mediaKeyTap: MediaKeyTap? = nil
     var isAccessibilityAvailable = false

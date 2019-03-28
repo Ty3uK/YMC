@@ -92,7 +92,7 @@ class Player {
     }
     public var coverImage: NSImage? {
         get {
-            guard let result = try? _coverImage$.value() else { return nil }
+            guard let result = ((try? _coverImage$.value()) as NSImage??) else { return nil }
             return result
         }
     }
