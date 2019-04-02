@@ -8,6 +8,6 @@
 	o.async=1; o.src=t; o.id='fathom-script';
 	m.parentNode.insertBefore(o,m)
 })(document, window, '//fathom.karelov.info/tracker.js', 'fathom');
-fathom('set', 'siteId', 'AIONV');
+fathom('set', 'siteId', 'LUGEB');
 fathom('trackPageview');
 /* eslint-enable */
