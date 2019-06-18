@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -619,7 +620,7 @@
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="toggleSourceList:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
+                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -701,9 +702,11 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-pt-dlK">
                                 <rect key="frame" x="22" y="190" width="212" height="18"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="38" id="SPR-xH-Nxb"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="749" constant="21" id="iIS-by-Ir7"/>
                                     <constraint firstAttribute="width" constant="208" id="yOr-TP-kFc"/>
                                 </constraints>
-                                <textFieldCell key="cell" alignment="center" title="No title" id="NWg-5g-jwh">
+                                <textFieldCell key="cell" truncatesLastVisibleLine="YES" alignment="center" title="No title" id="NWg-5g-jwh">
                                     <font key="font" metaFont="systemBold" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -713,8 +716,10 @@
                                 <rect key="frame" x="22" y="171" width="212" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="208" id="KOp-g3-uMP"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="38" id="i6y-CP-mo5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="749" constant="21" id="zUD-tL-lXf"/>
                                 </constraints>
-                                <textFieldCell key="cell" alignment="center" title="No artist" id="zKk-jV-QJW">
+                                <textFieldCell key="cell" truncatesLastVisibleLine="YES" alignment="center" title="No artist" id="zKk-jV-QJW">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -794,14 +799,14 @@
                                 </connections>
                             </button>
                             <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SGb-hr-hzJ" userLabel="Settings PopupButton">
-                                <rect key="frame" x="180" y="45" width="24" height="22"/>
+                                <rect key="frame" x="154" y="45" width="76" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="4ii-bD-OHO"/>
-                                    <constraint firstAttribute="width" constant="18" id="ePA-TC-lWy"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="ePA-TC-lWy"/>
                                 </constraints>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="MAk-97-cN3">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="SBj-OC-Feu">
                                         <items>
                                             <menuItem title="Item 1" hidden="YES" id="UeG-Jz-TFs">
