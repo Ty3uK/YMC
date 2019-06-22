@@ -12,14 +12,16 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "io.reactivex.rxjava2:rxjava:2.2.9"
-    compile 'no.tornado:tornadofx:1.7.19'
-    compile 'org.tinylog:tinylog-api-kotlin:2.0.0-M4.3'
-    compile 'org.tinylog:tinylog-impl:2.0.0-M4.3'
+    implementation 'no.tornado:tornadofx:1.7.19'
+    implementation 'org.tinylog:tinylog-api-kotlin:2.0.0-M4.3'
+    implementation 'org.tinylog:tinylog-impl:2.0.0-M4.3'
+    implementation 'com.beust:klaxon:5.0.1'
 }
 
 compileKotlin {

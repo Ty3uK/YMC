@@ -1,7 +1,6 @@
 package info.karelov.ymc.classes
 
 import io.reactivex.subjects.BehaviorSubject
-import javafx.scene.image.Image
 
 enum class PlayerControlsAvailability {
     PREV,
@@ -26,27 +25,27 @@ data class CurrentTrack(
     val cover: String?,
     val liked: Boolean,
     val link: String?
-)
+): IncomingMessageData()
 
 data class Controls(
     val next: Boolean?,
     val prev: Boolean?,
     val like: Boolean?
-)
+): IncomingMessageData()
 
 data class IsPlaying(
     val state: Boolean
-)
+): IncomingMessageData()
 
 data class IsLiked(
     val state: Boolean
-)
+): IncomingMessageData()
 
 data class PlayerState(
     val currentTrack: CurrentTrack,
     val controls: Controls,
     val isPlaying: Boolean
-)
+): IncomingMessageData()
 
 @Suppress("PrivatePropertyName", "ObjectPropertyName")
 class Player {

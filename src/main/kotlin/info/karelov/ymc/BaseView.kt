@@ -14,7 +14,7 @@ class BaseView: View() {
 
     override val root = vbox {
         style {
-            padding = box(48.px)
+            padding = box(48.px, 0.px)
             backgroundColor += c(50, 50, 50)
         }
 

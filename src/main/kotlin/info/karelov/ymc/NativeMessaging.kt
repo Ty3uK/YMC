@@ -6,6 +6,7 @@ import io.reactivex.observables.ConnectableObservable
 import io.reactivex.schedulers.Schedulers
 import java.io.InputStream
 import java.nio.charset.Charset
+import kotlin.system.exitProcess
 
 fun readMessage(stream: InputStream): String? {
     var b = ByteArray(4)
@@ -38,7 +39,7 @@ fun getInt(bytes: ByteArray): Int {
 }
 
 fun getObservable(): ConnectableObservable<String> {
-    return Observable.create(ObservableOnSubscribe<String> {
+    val observable = Observable.create(ObservableOnSubscribe<String> {
         try {
             while (true) {
                 val message = readMessage(System.`in`)
@@ -53,5 +54,13 @@ fun getObservable(): ConnectableObservable<String> {
 
         it.onComplete()
     }).subscribeOn(Schedulers.io()).publish()
+
+    observable.subscribe(
+        {},
+        { exitProcess(0) },
+        { exitProcess(0) }
+    )
+
+    return observable
 }
 

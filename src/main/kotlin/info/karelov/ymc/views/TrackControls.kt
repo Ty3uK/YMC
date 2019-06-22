@@ -14,6 +14,10 @@ class TrackControls : View() {
             marginBottom = 32.0
         }
 
+        style {
+            padding = box(0.px, 48.px)
+        }
+
         button("Prev") {
             hboxConstraints {
                 marginRight = 20.0

@@ -1,15 +1,18 @@
 package info.karelov.ymc
 
+import com.beust.klaxon.Klaxon
+import info.karelov.ymc.classes.CurrentTrack
+import info.karelov.ymc.classes.IncomingMessage
 import info.karelov.ymc.classes.Player
 import io.reactivex.schedulers.Schedulers
 import javafx.application.Platform
 import javafx.stage.Screen
 import javafx.stage.Stage
 import javafx.stage.StageStyle
-import org.tinylog.Logger
 import tornadofx.App
 import tornadofx.find
 import tornadofx.launch
+import tornadofx.runAsync
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 
@@ -67,14 +70,15 @@ class App: App() {
             observable
                 .observeOn(Schedulers.computation())
                 .subscribe {
-                    Logger.info(it as Any)
+                    runAsync {
+                        val message = Klaxon().parse<IncomingMessage>(it) ?: return@runAsync
+
+                        if (message.data is CurrentTrack) {
+                            Player.instance.changeCurrentTrack(message.data)
+                        }
+                    }
                 }
-
             observable.connect()
-
-            Player.instance.`buttonPress$`.subscribe {
-                Logger.info(it)
-            }
 
             launch<info.karelov.ymc.App>(args)
         }

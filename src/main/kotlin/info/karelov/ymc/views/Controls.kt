@@ -9,6 +9,10 @@ class Controls: View() {
     private val controller: ControlsController by inject()
 
     override val root = hbox {
+        style {
+            padding = box(0.px, 48.px)
+        }
+
         button("Share") {
             hboxConstraints {
                 marginRight = 20.0
