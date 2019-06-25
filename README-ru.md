@@ -68,7 +68,7 @@
 
 #### Note
 
-If you get errors like `The application can't be opened` or `App is damaged and can't be opened` run this command in terminal:
+В случае ошибки `The application can't be opened` или `App is damaged and can't be opened` запустите следующую команду в терминале:
 
 ```bash
 sudo spctl --master-disable
