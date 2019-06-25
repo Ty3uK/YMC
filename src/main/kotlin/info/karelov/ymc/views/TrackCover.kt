@@ -1,7 +1,8 @@
 package info.karelov.ymc.views
 
 import info.karelov.ymc.classes.Player
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.scene.image.Image
 import tornadofx.*
 
 class TrackCover: View() {
@@ -13,24 +14,27 @@ class TrackCover: View() {
         }
 
         style {
-            padding = box(0.px, 48.px)
+            translateX = 48.px
+            translateY = 48.px
         }
 
-        imageview(controller.imageUrl) {
+        imageview {
             style {
                 fitWidth = 160.0
                 fitHeight = 160.0
             }
+
+            imageProperty().bind(controller.image)
         }
     }
 }
 
 class TrackCoverController: Controller() {
-    var imageUrl = SimpleStringProperty()
+    var image = SimpleObjectProperty<Image>()
 
     init {
         Player.instance.`coverImage$`.subscribe {
-            imageUrl.value = it
+            image.value = Image(it, 160.0, 160.0, true, true)
         }
     }
 }

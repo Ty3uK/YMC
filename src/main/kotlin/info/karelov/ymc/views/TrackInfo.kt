@@ -18,6 +18,7 @@ class TrackInfo: View() {
         }
 
         style {
+            translateY = 256.px
             padding = box(0.px, 24.px)
         }
 

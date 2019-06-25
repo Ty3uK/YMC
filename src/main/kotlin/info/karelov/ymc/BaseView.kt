@@ -12,9 +12,8 @@ class BaseView: View() {
     private val trackControls: TrackControls by inject()
     private val controls: Controls by inject()
 
-    override val root = vbox {
+    override val root = pane {
         style {
-            padding = box(48.px, 0.px)
             backgroundColor += c(50, 50, 50)
         }
 

@@ -5,6 +5,7 @@ import io.reactivex.ObservableOnSubscribe
 import io.reactivex.observables.ConnectableObservable
 import io.reactivex.schedulers.Schedulers
 import java.io.InputStream
+import java.io.InterruptedIOException
 import java.nio.charset.Charset
 import kotlin.system.exitProcess
 
@@ -15,7 +16,7 @@ fun readMessage(stream: InputStream): String? {
     val size = getInt(b)
 
     if (size == 0) {
-        return null
+        throw InterruptedIOException("Blocked communication")
     }
 
     b = ByteArray(size)
