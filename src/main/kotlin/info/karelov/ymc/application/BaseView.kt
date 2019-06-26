@@ -1,4 +1,4 @@
-package info.karelov.ymc
+package info.karelov.ymc.application
 
 import info.karelov.ymc.views.Controls
 import info.karelov.ymc.views.TrackControls
