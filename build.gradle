@@ -22,6 +22,7 @@ dependencies {
     implementation 'org.tinylog:tinylog-api-kotlin:2.0.0-M4.3'
     implementation 'org.tinylog:tinylog-impl:2.0.0-M4.3'
     implementation 'com.beust:klaxon:5.0.1'
+    implementation 'org.imgscalr:imgscalr-lib:4.2'
 }
 
 compileKotlin {

@@ -72,7 +72,7 @@ private fun createManifest(appPath: String, isChromeBasedBrowser: Boolean): Mani
     val manifest = Manifest(
         name = "ymc",
         description = "Control Yandex.Music from any window",
-        path = appPath,
+        path = "$appPath/ymc.sh",
         type = "stdio"
     )
 
@@ -92,7 +92,7 @@ private fun writeManifest(path: String): WriteManifestStatus {
     } else {
         "NativeMessagingHosts"
     }
-    val appPath = File(Main::class.java.protectionDomain.codeSource.location.toURI()).absolutePath ?: return WriteManifestStatus.Error
+    val appPath = File(Main::class.java.protectionDomain.codeSource.location.toURI()).parent ?: return WriteManifestStatus.Error
     val manifest = createManifest(appPath, !isFirefox)
     val manifestDataUgly = Klaxon().toJsonString(manifest)
     val manifestData = (Parser.default().parse(StringBuilder(manifestDataUgly)) as JsonObject).toJsonString(true)

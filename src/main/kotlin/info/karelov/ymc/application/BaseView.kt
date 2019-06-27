@@ -6,7 +6,7 @@ import info.karelov.ymc.views.TrackCover
 import info.karelov.ymc.views.TrackInfo
 import tornadofx.*
 
-class BaseView: View() {
+class BaseView : View() {
     private val trackCover: TrackCover by inject()
     private val trackInfo: TrackInfo by inject()
     private val trackControls: TrackControls by inject()

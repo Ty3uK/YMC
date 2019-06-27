@@ -2,12 +2,14 @@ package info.karelov.ymc.application
 
 import com.beust.klaxon.Klaxon
 import info.karelov.ymc.classes.*
+import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import javafx.application.Platform
 import javafx.scene.control.Alert
 import javafx.stage.Screen
 import javafx.stage.Stage
 import javafx.stage.StageStyle
+import org.imgscalr.Scalr
 import tornadofx.*
 import tornadofx.App
 import java.awt.*
@@ -15,16 +17,18 @@ import java.awt.datatransfer.StringSelection
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.awt.image.BufferedImage
+import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 import kotlin.system.exitProcess
 
-class App: App() {
+class App : App() {
     var showStage = false
 
     init {
         checkManifest()
         observeMessagesFromExtension()
         observePlayerButtons()
+        runRefreshInterval()
     }
 
     override fun start(stage: Stage) {
@@ -85,14 +89,7 @@ class App: App() {
         val tray = SystemTray.getSystemTray()
         val size = tray.trayIconSize
         val icon = ImageIO.read(resources.url("/icon.png"))
-        val scaled = icon.getScaledInstance(size.width - 2, size.height - 2, Image.SCALE_SMOOTH)
-        val bufferedImage = BufferedImage(size.width - 2, size.height - 2, BufferedImage.TYPE_INT_ARGB)
-        val g = bufferedImage.createGraphics()
-
-        g.drawImage(scaled, 0, 0, null)
-        g.dispose()
-
-        return bufferedImage
+        return Scalr.resize(icon, Scalr.Method.ULTRA_QUALITY, size.width - 2, size.height - 2)
     }
 
     private fun showAlert(title: String, message: String, type: Alert.AlertType) {
@@ -174,6 +171,13 @@ class App: App() {
                 else -> return@subscribe
             }
         }
+    }
+
+    private fun runRefreshInterval() {
+        Observable.interval(0, 30, TimeUnit.SECONDS)
+            .subscribe {
+                writeMessage("REFRESH")
+            }
     }
 
     companion object {

@@ -8,7 +8,7 @@ import javafx.scene.text.FontWeight
 import javafx.scene.text.TextAlignment
 import tornadofx.*
 
-class TrackInfo: View() {
+class TrackInfo : View() {
     private val controller: TrackInfoController by inject()
 
     override val root = vbox {
@@ -47,7 +47,7 @@ class TrackInfo: View() {
     }
 }
 
-class TrackInfoController: Controller() {
+class TrackInfoController : Controller() {
     val title = SimpleStringProperty()
     val artist = SimpleStringProperty()
 

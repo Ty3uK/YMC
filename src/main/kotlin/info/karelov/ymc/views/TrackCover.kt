@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import tornadofx.*
 
-class TrackCover: View() {
+class TrackCover : View() {
     private val controller: TrackCoverController by inject()
 
     override val root = vbox {
@@ -29,7 +29,7 @@ class TrackCover: View() {
     }
 }
 
-class TrackCoverController: Controller() {
+class TrackCoverController : Controller() {
     var image = SimpleObjectProperty<Image>()
 
     init {

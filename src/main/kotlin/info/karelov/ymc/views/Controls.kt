@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView
 import tornadofx.*
 import kotlin.system.exitProcess
 
-class Controls: View() {
+class Controls : View() {
     private val controller: ControlsController by inject()
     private val imageSize = 18.0
     private val linkImage = ImageView(
@@ -63,15 +63,17 @@ class Controls: View() {
 
             disableProperty().bind(controller.isLikeEnabled.not())
 
-            controller.isLiked.addListener { _, _, newValue ->  run {
-                runAsync {  } ui {
-                    this.graphic = if (newValue) {
-                        likedImage
-                    } else {
-                        likeImage
+            controller.isLiked.addListener { _, _, newValue ->
+                run {
+                    runAsync { } ui {
+                        this.graphic = if (newValue) {
+                            likedImage
+                        } else {
+                            likeImage
+                        }
                     }
                 }
-            }}
+            }
         }
 
         button("", settingsImage) {
@@ -97,7 +99,7 @@ class Controls: View() {
     }
 }
 
-class ControlsController: Controller() {
+class ControlsController : Controller() {
     val isLikeEnabled = SimpleBooleanProperty(false)
     val isLiked = SimpleBooleanProperty(false)
 

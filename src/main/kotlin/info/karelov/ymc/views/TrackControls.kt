@@ -63,15 +63,17 @@ class TrackControls : View() {
 
             disableProperty().bind(controller.isNextEnabled.not())
 
-            controller.isPlaying.addListener { _, _, newValue ->  run {
-                runAsync {  } ui {
-                    this.graphic = if (newValue) {
-                        pauseImage
-                    } else {
-                        playImage
+            controller.isPlaying.addListener { _, _, newValue ->
+                run {
+                    runAsync { } ui {
+                        this.graphic = if (newValue) {
+                            pauseImage
+                        } else {
+                            playImage
+                        }
                     }
                 }
-            }}
+            }
         }
 
         button("", nextImage) {
@@ -88,7 +90,7 @@ class TrackControls : View() {
     }
 }
 
-class TrackControlsController: Controller() {
+class TrackControlsController : Controller() {
     val isPrevEnabled = SimpleBooleanProperty(false)
     val isNextEnabled = SimpleBooleanProperty(false)
     val isPlaying = SimpleBooleanProperty(false)

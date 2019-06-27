@@ -25,7 +25,7 @@ data class OutgoingMessage(
 
 open class IncomingMessageData
 
-class IncomingMessageAdapter: TypeAdapter<IncomingMessageData> {
+class IncomingMessageAdapter : TypeAdapter<IncomingMessageData> {
     override fun classFor(type: Any): KClass<out IncomingMessageData> = when (type as String) {
         "TRACK_INFO" -> CurrentTrack::class
         "CURRENT_TRACK" -> CurrentTrack::class
@@ -83,6 +83,7 @@ fun getObservable(): ConnectableObservable<String> {
                 val message = readMessage(System.`in`)
 
                 if (message != null) {
+                    Logger.instance.log("MESSAGE FROM EXT: $message")
                     it.onNext(message)
                 }
             }
