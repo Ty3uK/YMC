@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat
-
 plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.4'
     id 'application'
@@ -23,6 +21,9 @@ dependencies {
     implementation 'org.tinylog:tinylog-impl:2.0.0-M4.3'
     implementation 'com.beust:klaxon:5.0.1'
     implementation 'org.imgscalr:imgscalr-lib:4.2'
+
+    implementation files('src/main/lib/JHotKeys.jar')
+    runtime files('src/main/lib/unix/lib/JXGrabKey.jar')
 }
 
 compileKotlin {
@@ -46,6 +47,18 @@ sourceSets {
 application {
     mainClassName = "info.karelov.ymc.Main"
 }
+
+task copyLib(type: Copy) {
+    dependsOn shadowJar
+
+    from("$projectDir/src/main") {
+        include "lib/unix/lib/libJXGrabKey.so"
+        include "lib/unix/lib64/libJXGrabKey.so"
+    }
+    into "$buildDir/libs"
+}
+
+task fullBuild (dependsOn: [clean, shadowJar, copyLib])
 
 //shadowJar {
 //    manifest {
